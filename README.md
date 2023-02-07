@@ -5,6 +5,10 @@ A minesweeper game build using Flutter during Global Hack Week 2023 hosted by ML
 
 
 ## Screenshots
+
  Web                       |  Phone
 :-------------------------:|:-------------------------:
 ![](https://github.com/AmanNegi/flutter_minesweeper/blob/main/screenshots/home_page.png) | ![](https://github.com/AmanNegi/flutter_minesweeper/blob/main/screenshots/phone.jpg)
+
+
+</p>
