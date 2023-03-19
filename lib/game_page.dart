@@ -60,58 +60,62 @@ class _GamePageState extends State<GamePage> {
         ),
         itemCount: gameConstraints.getLen(),
         itemBuilder: (context, index) {
-          return GridItem(
-            val: ans[index],
-            onZeroFound: () async {
-              selected = List.filled(gameConstraints.getLen(), 1);
-              setState(() {});
-              await Future.delayed(const Duration(seconds: 2));
-
-              currentAns = 0;
-              // ignore: use_build_context_synchronously
-              var value = await showDialog(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (context) {
-                    return const LostDialog();
-                  });
-
-              if (value) {
-                _generateRandomNumberList();
-              } else {
-                selected = List.filled(gameConstraints.getLen(), 0);
-              }
-              setState(() {});
-            },
-            selected: selected[index] == 1,
-            toggleSelected: () async {
-              selected[index] = 1;
-              currentAns++;
-
-              debugPrint("CurrentAns: $currentAns TotalAns: $totalAns ");
-
-              // If currentAns equals totalAns, all 1's are selected
-              if (currentAns == totalAns) {
-                selected = List.filled(gameConstraints.getLen(), 1);
-                setState(() {});
-                await Future.delayed(const Duration(seconds: 2));
-
-                // ignore: use_build_context_synchronously
-                await showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: (context) {
-                      return const WonDialog();
-                    });
-
-                _generateRandomNumberList();
-              }
-
-              setState(() {});
-            },
-          );
+          return _getGridItem(index, context);
         },
       ),
+    );
+  }
+
+  GridItem _getGridItem(int index, BuildContext context) {
+    return GridItem(
+      val: ans[index],
+      onZeroFound: () async {
+        selected = List.filled(gameConstraints.getLen(), 1);
+        setState(() {});
+        await Future.delayed(const Duration(seconds: 2));
+
+        currentAns = 0;
+        // ignore: use_build_context_synchronously
+        var value = await showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (context) {
+              return const LostDialog();
+            });
+
+        if (value) {
+          _generateRandomNumberList();
+        } else {
+          selected = List.filled(gameConstraints.getLen(), 0);
+        }
+        setState(() {});
+      },
+      selected: selected[index] == 1,
+      toggleSelected: () async {
+        selected[index] = 1;
+        currentAns++;
+
+        debugPrint("CurrentAns: $currentAns TotalAns: $totalAns ");
+
+        // If currentAns equals totalAns, all 1's are selected
+        if (currentAns == totalAns) {
+          selected = List.filled(gameConstraints.getLen(), 1);
+          setState(() {});
+          await Future.delayed(const Duration(seconds: 2));
+
+          // ignore: use_build_context_synchronously
+          await showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (context) {
+                return const WonDialog();
+              });
+
+          _generateRandomNumberList();
+        }
+
+        setState(() {});
+      },
     );
   }
 }
