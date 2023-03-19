@@ -12,6 +12,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Create folder and list files
+        run: |
+          if [ ! -d "outputs" ]; then
+            mkdir outputs
+          fi
+          if [ ! -f "outputs/files.txt" ]; then
+            find . -type f > outputs/files.txt
+          fi
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v1
         with:
