@@ -29,7 +29,21 @@ jobs:
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Save APK
+      # - name: Save APK
+      #   run: |
+      #     mkdir -p outputs/
+      #     mv build/app/outputs/flutter-apk/app-release.apk outputs/app-release.apk
+
+      - name: Configure Git
         run: |
-          mkdir -p outputs/
-          mv build/app/outputs/flutter-apk/app-release.apk outputs/app-release.apk
+          git config user.name "amannegi"
+          git config user.email "akuro787898@gmail.com"
+
+      - name: Commit changes
+        run: |
+          git add .
+          git commit -m "Add my-folder and files.txt"
+
+      - name: Push changes
+        run: |
+          git push origin main
