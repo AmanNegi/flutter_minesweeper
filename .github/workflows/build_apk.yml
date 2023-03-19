@@ -1,0 +1,26 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.5.3'
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Save APK
+        run: |
+          mkdir -p outputs/
+          mv build/app/outputs/flutter-apk/app-release.apk outputs/app-release.apk
