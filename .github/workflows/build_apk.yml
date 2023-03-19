@@ -46,7 +46,7 @@ jobs:
       - name: Commit changes
         run: |
           git add .
-          git commit -m "Add my-folder and files.txt"
+          git commit -m "action: Generate release APK"
 
       - name: Push changes
         run: |
