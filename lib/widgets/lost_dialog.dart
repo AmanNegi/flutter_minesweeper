@@ -13,12 +13,10 @@ class LostDialog extends StatefulWidget {
 class _LostDialogState extends State<LostDialog> {
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
     return Dialog(
       child: Container(
-        // height: 0.25 * height,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(15.0),
